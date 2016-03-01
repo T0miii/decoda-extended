@@ -30,6 +30,14 @@ class DefaultFilter extends AbstractFilter {
      * @type array
      */
     protected $_tags = array(
+        'p' => array(
+            'htmlTag' => array('p'),
+            'displayType' => Decoda::TYPE_INLINE,
+            'allowedTypes' => Decoda::TYPE_INLINE,
+        	'attributes' => array(
+				'default' => AbstractFilter::ALPHA
+       		)
+        ),
         'b' => array(
             'htmlTag' => array('b', 'strong'),
             'displayType' => Decoda::TYPE_INLINE,
