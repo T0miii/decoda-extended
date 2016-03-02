@@ -36,7 +36,7 @@ class DefaultFilter extends AbstractFilter {
             'allowedTypes' => Decoda::TYPE_INLINE,
         	'attributes' => array(
 				'id' => AbstractFilter::ALPHA,
-				'class' => AbstractFilter::ALPHA,
+				'class' => AbstractFilter::WILDCARD,
        		)
         ),
         'b' => array(
