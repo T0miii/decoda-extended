@@ -1,3 +1,11 @@
+## Disclaimer ##
+
+* This Fork is heavily customised for own purposes
+* If you encounter any problems using it, please refer to the original code by: milesj
+* added email attribute: cc, bcc, subject, body
+* added p tag and attributes: id, class
+* added attribute class, and target to the url tag
+
 # Decoda v6.7.1 [![Build Status](https://travis-ci.org/milesj/decoda.png?branch=master)](https://travis-ci.org/milesj/decoda) #
 
 A lightweight lexical string parser for BBCode styled markup.

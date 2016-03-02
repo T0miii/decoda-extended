@@ -35,7 +35,12 @@ class EmailFilter extends AbstractFilter {
             'allowedTypes' => Decoda::TYPE_NONE,
             'escapeAttributes' => false,
             'attributes' => array(
-                'default' => true
+                'default' => true,
+            	'subject' => AbstractFilter::WILDCARD,
+            	'body' => AbstractFilter::WILDCARD,
+            	'cc' => AbstractFilter::WILDCARD,
+            	'bcc' => AbstractFilter::WILDCARD,
+            	'class' => AbstractFilter::WILDCARD,
             )
         ),
         'mail' => array(
@@ -60,25 +65,29 @@ class EmailFilter extends AbstractFilter {
         }
 
         // Return an invalid email
+        /*
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return $content;
         }
-
-        $encrypted = '';
-
-        if ($this->getConfig('encrypt')) {
-            $length = mb_strlen($email);
-
-            if ($length > 0) {
-                for ($i = 0; $i < $length; ++$i) {
-                    $encrypted .= '&#' . ord(mb_substr($email, $i, 1)) . ';';
-                }
-            }
-        } else {
-            $encrypted = $email;
-        }
+		*/
+        $encrypted = $this->_encrypt($email);
 
         $tag['attributes']['href'] = 'mailto:' . $encrypted;
+
+        if (count(array_intersect_key(array_flip($email_attr), $tag['attributes']))>0) {
+        	$tag['attributes']['href'] .= '?';
+        }
+
+        foreach($email_attr as $attr) {
+        	if (isset($tag['attributes'][$attr])) {
+        		$value_encrypted = $this->_encrypt($tag['attributes'][$attr]);
+        		$tag['attributes']['href'] .= $attr.'='.$value_encrypted;
+        		unset($tag['attributes'][$attr]);
+        		if (count(array_intersect_key(array_flip($email_attr), $tag['attributes']))>0) {
+        			$tag['attributes']['href'] .= '&';
+        		}
+        	}
+        }
 
         if ($this->getParser()->getConfig('shorthandLinks')) {
             $tag['content'] = $this->message('mail');
@@ -92,6 +101,33 @@ class EmailFilter extends AbstractFilter {
 
         return parent::parse($tag, $content);
     }
+
+
+    /**
+     * encrypt a given string
+     *
+     * @param string $email
+     * @return string
+     */
+    protected function _encrypt($email) {
+
+    	$encrypted = '';
+
+    	if ($this->getConfig('encrypt')) {
+    		$length = mb_strlen($email);
+
+    		if ($length > 0) {
+    			for ($i = 0; $i < $length; ++$i) {
+    				$encrypted .= '&#' . ord(mb_substr($email, $i, 1)) . ';';
+    			}
+    		}
+    	} else {
+    		$encrypted = $email;
+    	}
+
+    	return $encrypted;
+    }
+
 
     /**
      * Strip a node but keep the email regardless of location.

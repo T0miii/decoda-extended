@@ -35,7 +35,9 @@ class UrlFilter extends AbstractFilter {
             'displayType' => Decoda::TYPE_INLINE,
             'allowedTypes' => Decoda::TYPE_INLINE,
             'attributes' => array(
-                'default' => true
+                'default' => true,
+            	'target' => AbstractFilter::WILDCARD,
+            	'class' => AbstractFilter::WILDCARD
             ),
             'mapAttributes' => array(
                 'default' => 'href'

@@ -19,7 +19,7 @@
         "phpunit/phpunit": "~4.7"
     },
     "support": {
-        "source": "https://github.com/milesj/decoda"
+        "source": "https://github.com/T0miii/decoda-extended"
     },
     "autoload": {
         "psr-0": { "Decoda": "src/" }
