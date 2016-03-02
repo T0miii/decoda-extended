@@ -56,6 +56,9 @@ class EmailFilter extends AbstractFilter {
      * @return string
      */
     public function parse(array $tag, $content) {
+
+    	$email_attr = array('cc', 'bcc', 'subject', 'body');
+
         if (empty($tag['attributes']['default'])) {
             $email = $content;
             $default = false;
