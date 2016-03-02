@@ -1050,7 +1050,7 @@ class Decoda {
         if (!$disabled) {
             $found = array();
 
-            preg_match_all('/([a-z_\-]+)=\"(.*?)\"/i', $string, $matches, PREG_SET_ORDER);
+            preg_match_all('/([a-z_\-]+)=(?:\"|\&quot;)(.*?)(?:\"|\&quot;)/i', $string, $matches, PREG_SET_ORDER);
 
             if ($matches) {
                 foreach ($matches as $match) {
