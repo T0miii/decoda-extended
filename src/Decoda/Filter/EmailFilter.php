@@ -83,7 +83,8 @@ class EmailFilter extends AbstractFilter {
 
         foreach($email_attr as $attr) {
         	if (isset($tag['attributes'][$attr])) {
-        		$value_encrypted = $this->_encrypt($tag['attributes'][$attr]);
+        		//!!!  only decode html special chars in email, do not do this in any other tag, or filter !!!
+        		$value_encrypted = $this->_encrypt(rawurlencode(htmlspecialchars_decode($tag['attributes'][$attr])));
         		$tag['attributes']['href'] .= $attr.'='.$value_encrypted;
         		unset($tag['attributes'][$attr]);
         		if (count(array_intersect_key(array_flip($email_attr), $tag['attributes']))>0) {
