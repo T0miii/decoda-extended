@@ -30,7 +30,9 @@ class ListFilter extends AbstractFilter {
             'childrenWhitelist' => array('li', '*'),
             'onlyTags' => true,
             'attributes' => array(
-                'default' => array(self::LIST_TYPE, 'type-{default}')
+                'default' => array(self::LIST_TYPE, 'type-{default}'),
+            	'id' => AbstractFilter::WILDCARD,
+            	'class' => AbstractFilter::WILDCARD,
             ),
             'mapAttributes' => array(
                 'default' => 'class'
@@ -50,7 +52,9 @@ class ListFilter extends AbstractFilter {
             'childrenWhitelist' => array('li', '*'),
             'onlyTags' => true,
             'attributes' => array(
-                'default' => array(self::LIST_TYPE, 'type-{default}')
+                'default' => array(self::LIST_TYPE, 'type-{default}'),
+            	'id' => AbstractFilter::WILDCARD,
+            	'class' => AbstractFilter::WILDCARD,
             ),
             'mapAttributes' => array(
                 'default' => 'class'

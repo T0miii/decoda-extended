@@ -44,6 +44,11 @@ class DefaultFilter extends AbstractFilter {
             'displayType' => Decoda::TYPE_INLINE,
             'allowedTypes' => Decoda::TYPE_INLINE
         ),
+    	'em' => array(
+    			'htmlTag' => array('em'),
+    			'displayType' => Decoda::TYPE_INLINE,
+    			'allowedTypes' => Decoda::TYPE_INLINE
+    	),
         'i' => array(
             'htmlTag' => array('i', 'em'),
             'displayType' => Decoda::TYPE_INLINE,
