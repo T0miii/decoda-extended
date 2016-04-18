@@ -68,7 +68,8 @@ class UrlFilter extends AbstractFilter {
         }
 
         // Allow relative and absolute paths, else check protocols
-        if (!preg_match('/^(\.\.?)?\//', $url)) {
+        if (!preg_match('/^(\.\.?)?\//', $url)
+       	 && !preg_match('/\{([A-Z]+(?:_?[A-Z]+)+)\}/', $url)) { /* allow placeholders */
             if (!$hasProtocol) {
                 // Only allow if no protocol exists, just not the ones not in the list
                 if (preg_match('/^(?![a-z]+:\/\/)/', $url) && filter_var($defaultProtocol . '://' . $url, FILTER_VALIDATE_URL)) {
