@@ -33,7 +33,9 @@ class VideoFilter extends AbstractFilter {
             'contentPattern' => self::VIDEO_PATTERN,
             'attributes' => array(
                 'default' => self::ALPHA,
-                'size' => self::SIZE_PATTERN
+                'size' => self::SIZE_PATTERN,
+            	'width' => AbstractFilter::NUMERIC,
+            	'height' => AbstractFilter::NUMERIC
             )
         ),
         'youtube' => array(
@@ -42,7 +44,9 @@ class VideoFilter extends AbstractFilter {
             'allowedTypes' => Decoda::TYPE_NONE,
             'contentPattern' => self::VIDEO_PATTERN,
             'attributes' => array(
-                'size' => self::SIZE_PATTERN
+                'size' => self::SIZE_PATTERN,
+            	'width' => AbstractFilter::NUMERIC,
+            	'height' => AbstractFilter::NUMERIC
             )
         ),
         'vimeo' => array(
@@ -224,8 +228,13 @@ class VideoFilter extends AbstractFilter {
         $video = $this->_formats[$provider];
         $size = isset($video[$size]) ? $video[$size] : $video['medium'];
 
-        $tag['attributes']['width'] = $size[0];
-        $tag['attributes']['height'] = $size[1];
+        if (!isset($tag['attributes']['width'])) {
+	        $tag['attributes']['width'] = $size[0];
+        }
+        if (!isset($tag['attributes']['height'])) {
+        	$tag['attributes']['height'] = $size[1];
+        }
+
         $tag['attributes']['player'] = $video['player'];
         $tag['attributes']['url'] = str_replace(array('{id}', '{width}', '{height}'), array($content, $size[0], $size[1]), $video['path']);
 
